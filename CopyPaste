@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <input type="text" id="testInput" value="testInput">
+  <div id="testDiv">testdiv</div>
+  <button id="copyTestInput">Share</button>
+  <button id="copyTestDiv">Copy Content</button>
+	<script>
+		/*
+		* 复制输入框内容
+		*/
+		function copyInput() {
+		  var copyVal = document.querySelector("#testInput");666
+		  copyVal.select();
+		  return document.execCommand('copy');
+		}
+
+		/*
+		* 复制元素节点的内容
+		*/
+		function copyDiv() {
+		  var range = document.createRange();
+		  range.selectNode(document.querySelector('#testDiv'));
+		  var selection = window.getSelection();
+		  if (selection.rangeCount > 0) selection.removeAllRanges();
+		  selection.addRange(range);
+		  return document.execCommand('copy');
+		}
+
+		/*
+		* 提示
+		* param {Boolean} status
+		*/
+		function tips(status) {
+		  if (status) {
+		    alert('Copy Successfully');
+		  } else {
+		    alert('Failed to Copy');
+		  }
+		}
+
+		document.querySelector('#copyTestInput').addEventListener('click', function() {
+		  var isCopyed = copyInput();
+		  tips(isCopyed);
+		}, false);
+
+		document.querySelector('#copyTestDiv').addEventListener('click', function() {
+		  var isCopyed = copyDiv();
+		  tips(isCopyed);
+		}, false);
+	</script>
+</body>
+</html>
